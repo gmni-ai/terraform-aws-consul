@@ -14,7 +14,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_autoscaling_group" "autoscaling_group" {
-  name_prefix = var.cluster_name
+  name = var.cluster_name
 
    launch_template {
     id      = aws_launch_template.launch_configuration.id
@@ -219,7 +219,7 @@ module "security_group_rules" {
 resource "aws_iam_instance_profile" "instance_profile" {
   count = var.enable_iam_setup ? 1 : 0
 
-  name_prefix = var.cluster_name
+  name = var.cluster_name
   path        = var.instance_profile_path
   role        = element(concat(aws_iam_role.instance_role.*.name, [""]), 0)
 
@@ -234,7 +234,7 @@ resource "aws_iam_instance_profile" "instance_profile" {
 resource "aws_iam_role" "instance_role" {
   count = var.enable_iam_setup ? 1 : 0
 
-  name_prefix        = var.cluster_name
+  name        = var.cluster_name
   assume_role_policy = data.aws_iam_policy_document.instance_role.json
 
   permissions_boundary = var.iam_permissions_boundary
