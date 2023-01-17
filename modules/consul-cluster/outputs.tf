@@ -18,6 +18,11 @@ output "iam_role_arn" {
   description = "This is the arn of instance role if enable_iam_setup variable is set to true"
 }
 
+output "iam_role_name" {
+  value       = element(concat(aws_iam_role.instance_role.*.name, [""]), 0)
+  description = "This is the name of instance role if enable_iam_setup variable is set to true"
+}
+
 output "iam_role_id" {
   value       = element(concat(aws_iam_role.instance_role.*.id, [""]), 0)
   description = "This is the id of instance role if enable_iam_setup variable is set to true"
