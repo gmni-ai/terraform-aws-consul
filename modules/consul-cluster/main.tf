@@ -55,7 +55,7 @@ resource "aws_autoscaling_group" "autoscaling_group" {
     content {
       key                 = tag.value.key
       value               = tag.value.value
-      propagate_at_launch = false
+      propagate_at_launch = tag.value.propagate_at_launch
     }
   }
 
